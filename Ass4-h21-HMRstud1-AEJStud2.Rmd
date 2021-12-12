@@ -6,5 +6,5 @@ output: html_notebook
 suppressPackageStartupMessages({
 library(PxWebApiData)
 library(tidyverse)
-library(lubridate
+library(lubridate)
 })
