@@ -12,9 +12,10 @@ library(broom)
 library(lmtest)
 library(sandwich)
 library(viridis)
+library(PxWebApiData)
 })
-
 knitr::opts_chunk$set(echo=FALSE, include = FALSE)
+
 
 ```
 

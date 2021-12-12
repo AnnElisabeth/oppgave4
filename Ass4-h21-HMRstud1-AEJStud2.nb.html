@@ -216,85 +216,27 @@ pre code {
 
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VwcHJlc3NQYWNrYWdlU3RhcnR1cE1lc3NhZ2VzKHtcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KG1vZGVscilcbmxpYnJhcnkoYnJvb20pXG5saWJyYXJ5KGxtdGVzdClcbmxpYnJhcnkoc2FuZHdpY2gpXG5saWJyYXJ5KHZpcmlkaXMpXG59KVxuXG5rbml0cjo6b3B0c19jaHVuayRzZXQoZWNobz1GQUxTRSwgaW5jbHVkZSA9IEZBTFNFKVxuXG5gYGAifQ== -->
-<pre class="r"><code>suppressPackageStartupMessages({
-library(tidyverse)
-library(lubridate)
-library(modelr)
-library(broom)
-library(lmtest)
-library(sandwich)
-library(viridis)
-})
-
-knitr::opts_chunk$set(echo=FALSE, include = FALSE)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB2ZWN0b3IgbWVkIHJlbGV2YW50ZSBrb21tdW5lbnVtbWVyXG5sb2FkKFwia25yLlJkYXRhXCIpXG5gYGAifQ== -->
-<pre class="r"><code># vector med relevante kommunenummer
-load(&quot;knr.Rdata&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG0yX3JXIDwtIEFwaURhdGEoXG4gIHVybFRvZGF0YSA9IFwiMDYwMzVcIixcbiAgUmVnaW9uID0ga25yLFxuICBDb250ZW50c0NvZGUgPSBcIkt2UHJpc1wiLFxuICBCb2xpZ3R5cGUgPSBcIjAxXCIsXG4gIFRpZCA9IGMoYXMuY2hhcmFjdGVyKDIwMDI6MjAxNykpXG4pXG5cbmBgYCJ9 -->
-<pre class="r"><code>pm2_rW &lt;- ApiData(
-  urlTodata = &quot;06035&quot;,
-  Region = knr,
-  ContentsCode = &quot;KvPris&quot;,
-  Boligtype = &quot;01&quot;,
-  Tid = c(as.character(2002:2017))
-)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="modell" class="section level3">
 <h3>Modell</h3>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9kMSA8LSAncG0yIH4gYWFyX2YgKyBUb3RhbF95YV9wICsgaW5jX2sxICsgaW5jX2s1ICsgdW5pX2tfbWYgKyB1bmlfbF9tZiArIFRyYWRlX3BjXzEwMEsnXG5gYGAifQ== -->
-<pre class="r"><code>mod1 &lt;- &#39;pm2 ~ aar_f + Total_ya_p + inc_k1 + inc_k5 + uni_k_mf + uni_l_mf + Trade_pc_100K&#39;</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="dummy-fylke-og-år" class="section level3">
 <h3>Dummy fylke og år</h3>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG0yICU+JSBmaWx0ZXIoZm5yICVpbiUgYyhcIjExXCIpKSAlPiVcbmdncGxvdChtYXBwaW5nID0gYWVzKHggPSBhYXJfZCwgeSA9IHJlc19tMikpICtcbnNjYWxlX2NvbG9yX3ZpcmlkaXMoZGlzY3JldGUgPSBUUlVFLCBvcHRpb24gPSBcIkRcIikgK1xuZ2VvbV9saW5lKGFlcyhncm91cCA9IGtuYXZuLCBjb2xvdXIgPSBrbmF2biwgc2l6ZSA9a25hdm4pKSArXG5zY2FsZV9zaXplX21hbnVhbCh2YWx1ZXMgPSBjKHNlcSgyLjAsIDAuNSwgYnkgPSAtMC4xKSkpICtcbmdlb21faGxpbmUoeWludGVyY2VwdCA9IDApICtcbnRoZW1lKGxlZ2VuZC5wb3NpdGlvbiA9ICdib3R0b20nKVxuXG5gYGAifQ== -->
-<pre class="r"><code>pm2 %&gt;% filter(fnr %in% c(&quot;11&quot;)) %&gt;%
-ggplot(mapping = aes(x = aar_d, y = res_m2)) +
-scale_color_viridis(discrete = TRUE, option = &quot;D&quot;) +
-geom_line(aes(group = knavn, colour = knavn, size =knavn)) +
-scale_size_manual(values = c(seq(2.0, 0.5, by = -0.1))) +
-geom_hline(yintercept = 0) +
-theme(legend.position = &#39;bottom&#39;)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="modell-for-hvert-år" class="section level3">
 <h3>Modell for hvert år</h3>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG0yX24kZGF0YVtbMV1dICU+JVxuaGVhZChuID0gNSlcblxuYGBgIn0= -->
-<pre class="r"><code>pm2_n$data[[1]] %&gt;%
-head(n = 5)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CnN1cHByZXNzUGFja2FnZVN0YXJ0dXBNZXNzYWdlcyh7CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShtb2RlbHIpCmxpYnJhcnkoYnJvb20pCmxpYnJhcnkobG10ZXN0KQpsaWJyYXJ5KHNhbmR3aWNoKQpsaWJyYXJ5KHZpcmlkaXMpCn0pCgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobz1GQUxTRSwgaW5jbHVkZSA9IEZBTFNFKQoKYGBgCgpgYGB7cn0KIyB2ZWN0b3IgbWVkIHJlbGV2YW50ZSBrb21tdW5lbnVtbWVyCmxvYWQoImtuci5SZGF0YSIpCmBgYAoKYGBge3J9CnBtMl9yVyA8LSBBcGlEYXRhKAogIHVybFRvZGF0YSA9ICIwNjAzNSIsCiAgUmVnaW9uID0ga25yLAogIENvbnRlbnRzQ29kZSA9ICJLdlByaXMiLAogIEJvbGlndHlwZSA9ICIwMSIsCiAgVGlkID0gYyhhcy5jaGFyYWN0ZXIoMjAwMjoyMDE3KSkKKQoKYGBgCgojIyMgTW9kZWxsCgpgYGB7cn0KbW9kMSA8LSAncG0yIH4gYWFyX2YgKyBUb3RhbF95YV9wICsgaW5jX2sxICsgaW5jX2s1ICsgdW5pX2tfbWYgKyB1bmlfbF9tZiArIFRyYWRlX3BjXzEwMEsnCmBgYAoKIyMjIER1bW15IGZ5bGtlIG9nIMOlcgoKYGBge3J9CnBtMiAlPiUgZmlsdGVyKGZuciAlaW4lIGMoIjExIikpICU+JQpnZ3Bsb3QobWFwcGluZyA9IGFlcyh4ID0gYWFyX2QsIHkgPSByZXNfbTIpKSArCnNjYWxlX2NvbG9yX3ZpcmlkaXMoZGlzY3JldGUgPSBUUlVFLCBvcHRpb24gPSAiRCIpICsKZ2VvbV9saW5lKGFlcyhncm91cCA9IGtuYXZuLCBjb2xvdXIgPSBrbmF2biwgc2l6ZSA9a25hdm4pKSArCnNjYWxlX3NpemVfbWFudWFsKHZhbHVlcyA9IGMoc2VxKDIuMCwgMC41LCBieSA9IC0wLjEpKSkgKwpnZW9tX2hsaW5lKHlpbnRlcmNlcHQgPSAwKSArCnRoZW1lKGxlZ2VuZC5wb3NpdGlvbiA9ICdib3R0b20nKQoKYGBgCgojIyMgTW9kZWxsIGZvciBodmVydCDDpXIKCmBgYHtyfQpwbTJfbiRkYXRhW1sxXV0gJT4lCmhlYWQobiA9IDUpCgpgYGAK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CnN1cHByZXNzUGFja2FnZVN0YXJ0dXBNZXNzYWdlcyh7CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShtb2RlbHIpCmxpYnJhcnkoYnJvb20pCmxpYnJhcnkobG10ZXN0KQpsaWJyYXJ5KHNhbmR3aWNoKQpsaWJyYXJ5KHZpcmlkaXMpCmxpYnJhcnkoUHhXZWJBcGlEYXRhKQp9KQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobz1GQUxTRSwgaW5jbHVkZSA9IEZBTFNFKQoKCmBgYAoKYGBge3J9CiMgdmVjdG9yIG1lZCByZWxldmFudGUga29tbXVuZW51bW1lcgpsb2FkKCJrbnIuUmRhdGEiKQpgYGAKCmBgYHtyfQpwbTJfclcgPC0gQXBpRGF0YSgKICB1cmxUb2RhdGEgPSAiMDYwMzUiLAogIFJlZ2lvbiA9IGtuciwKICBDb250ZW50c0NvZGUgPSAiS3ZQcmlzIiwKICBCb2xpZ3R5cGUgPSAiMDEiLAogIFRpZCA9IGMoYXMuY2hhcmFjdGVyKDIwMDI6MjAxNykpCikKCmBgYAoKIyMjIE1vZGVsbAoKYGBge3J9Cm1vZDEgPC0gJ3BtMiB+IGFhcl9mICsgVG90YWxfeWFfcCArIGluY19rMSArIGluY19rNSArIHVuaV9rX21mICsgdW5pX2xfbWYgKyBUcmFkZV9wY18xMDBLJwpgYGAKCiMjIyBEdW1teSBmeWxrZSBvZyDDpXIKCmBgYHtyfQpwbTIgJT4lIGZpbHRlcihmbnIgJWluJSBjKCIxMSIpKSAlPiUKZ2dwbG90KG1hcHBpbmcgPSBhZXMoeCA9IGFhcl9kLCB5ID0gcmVzX20yKSkgKwpzY2FsZV9jb2xvcl92aXJpZGlzKGRpc2NyZXRlID0gVFJVRSwgb3B0aW9uID0gIkQiKSArCmdlb21fbGluZShhZXMoZ3JvdXAgPSBrbmF2biwgY29sb3VyID0ga25hdm4sIHNpemUgPWtuYXZuKSkgKwpzY2FsZV9zaXplX21hbnVhbCh2YWx1ZXMgPSBjKHNlcSgyLjAsIDAuNSwgYnkgPSAtMC4xKSkpICsKZ2VvbV9obGluZSh5aW50ZXJjZXB0ID0gMCkgKwp0aGVtZShsZWdlbmQucG9zaXRpb24gPSAnYm90dG9tJykKCmBgYAoKIyMjIE1vZGVsbCBmb3IgaHZlcnQgw6VyCgpgYGB7cn0KcG0yX24kZGF0YVtbMV1dICU+JQpoZWFkKG4gPSA1KQoKYGBgCg==</div>
 
 
 
