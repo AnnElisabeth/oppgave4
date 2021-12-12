@@ -4,14 +4,32 @@ output: html_notebook
 ---
 
 ```{r}
-suppressPackageStartupMessages({
-library(tidyverse)
-library(lubridate)
-library(modlr)
-library(broom)
-library(sandwich)
-library(viridis)
+suppressPackageStartupMessages({ 
+  library(tidyverse) 
+  library(lubridate) 
+  library(modelr) 
+  library(broom) 
+  library(sandwich) 
+  library(viridis) 
 })
 
 knitr::opts_chunk$set(echo=FALSE, include = FALSE)
 
+```
+
+```{r}
+# vector med relevante kommunenummer
+load("knr.Rdata")
+
+```
+
+```{r}
+pm2_rW <- ApiData(
+  urlTodata = "06035",
+  Region = knr,
+  ContentsCode = "KvPris",
+  Boligtype = "01",
+  Tid = c(as.character(2002:2017))
+)
+
+```
