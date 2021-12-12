@@ -4,7 +4,6 @@ output: html_notebook
 ---
 
 ```{r}
-<<<<<<< HEAD
 suppressPackageStartupMessages({
 library(tidyverse)
 library(lubridate)
@@ -13,15 +12,6 @@ library(broom)
 library(lmtest)
 library(sandwich)
 library(viridis)
-=======
-suppressPackageStartupMessages({ 
-  library(tidyverse) 
-  library(lubridate) 
-  library(modelr) 
-  library(broom) 
-  library(sandwich) 
-  library(viridis) 
->>>>>>> 4c2038518e0c0121d1c3e3a8ffb723ef06ba344c
 })
 
 knitr::opts_chunk$set(echo=FALSE, include = FALSE)
@@ -31,7 +21,6 @@ knitr::opts_chunk$set(echo=FALSE, include = FALSE)
 ```{r}
 # vector med relevante kommunenummer
 load("knr.Rdata")
-
 ```
 
 ```{r}
